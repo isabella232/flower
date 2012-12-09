@@ -52,4 +52,5 @@ class TasksView(BaseHandler):
                                   limit=limit,
                                   worker=worker,
                                   type=type,
-                                  state=state)
+                                  state=state,
+                                  runtime=runtime)
