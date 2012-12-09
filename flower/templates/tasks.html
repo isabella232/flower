@@ -73,6 +73,13 @@
                 </select>
               </div>
             </div>
+            <div class="control-group">
+              <label class="control-label" for="input-runtime">Minimum Runtime:</label>
+              <div class="controls">
+                <input name="runtime" type="text" class="input-small" id="input-runtime"
+                       value="{{ runtime or '' }}">
+              </div>
+            </div>
             <div class="form-actions">
               <button class="btn btn-primary" type="submit">Apply filter</button>
               <button class="btn" onclick="flower.on_cancel_task_filter(event)">Cancel

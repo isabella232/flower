@@ -26,14 +26,22 @@ class TasksView(BaseHandler):
         worker = self.get_argument('worker', None)
         type = self.get_argument('type', None)
         state = self.get_argument('state', None)
+        runtime = self.get_argument('runtime', None)
 
         limit = limit and int(limit)
         worker = worker if worker != 'All' else None
         type = type if type != 'All' else None
         state = state if state != 'All' else None
+        runtime = None
+        if runtime:
+            try:
+                runtime = int(runtime)
+            except ValueError:
+                pass
 
         tasks = TaskModel.iter_tasks(app, limit=limit, type=type,
-                                     worker=worker, state=state)
+                                     worker=worker, state=state,
+                                     runtime=runtime)
         workers = WorkersModel.get_workers(app)
         seen_task_types = TaskModel.seen_task_types(app)
 

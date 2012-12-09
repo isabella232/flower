@@ -99,7 +99,7 @@ class TaskModel(BaseModel):
             return None
 
     @classmethod
-    def iter_tasks(cls, app, limit=None, type=None, worker=None, state=None):
+    def iter_tasks(cls, app, limit=None, type=None, worker=None, state=None, runtime=None):
         i = 0
         events_state = app.events.state
         for uuid, task in events_state.tasks_by_timestamp():
@@ -108,6 +108,8 @@ class TaskModel(BaseModel):
             if worker and task.worker.hostname != worker:
                 continue
             if state and task.state != state:
+                continue
+            if runtime and task.runtime and task.runtime > runtime:
                 continue
             yield uuid, task
             i += 1
